@@ -6,7 +6,7 @@
   "scripts": {
     "config": "node scripts/generate-config.js",
     "dev": "node scripts/generate-config.js && npx serve . -l 3000",
-    "build": "node scripts/generate-config.js"
+    "build": "node scripts/generate-config.js && node scripts/build.js"
   },
   "engines": { "node": ">=18" }
 }
