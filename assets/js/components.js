@@ -68,7 +68,7 @@ const SITE = {
     {
       for: "Skills", type: "suite",
       title: "Explore my skills", href: "pages/skills.html",
-      mainLabel: "What I build", chip: "7 services", art: ["frontend-2", "about-default"],
+      mainLabel: "What I build", chip: "7 services", art: ["mega-lair", "about-default"],
       main: [
         ["Web Development",           "pages/services/web-development.html", "Fast, responsive sites",   "service-0"],
         ["Frontend & UI",             "pages/services/front-end.html",       "Design to clean code",     "service-1"],
@@ -105,15 +105,15 @@ const SITE = {
       /* TEST menu. cls "mega--black" turns the blobs and the circle black (see mega-menu.css). Portrait = image key "hero-portrait". */
       for: "Contact", type: "suite", cls: "mega--black", noCap: true, noMain: true,   // noCap: no "01 Email" pill; noMain: no big image on the left
       title: "Get in touch", href: "#contact",
-      mainLabel: "Contact me", chip: "Open to work", art: ["frontend-2", "about-default"],
+      mainLabel: "Contact me", chip: "Open to work", art: ["mega-bg", "about-default"],
       main: [
         // left column (01-03): main contacts + LinkedIn. right column (04-06): second email, second number + GitHub.
         ["Email",           "mailto:itechdummvry@gmail.com",                  "itechdummvry@gmail.com",           "about-default"],
         ["Phone",           "tel:+639467577265",                              "+63 (946) 757-7265",               "about-default"],
         ["LinkedIn",        "https://linkedin.com/in/charles-andrei-ignacio", "Let's connect",                    "about-default"],
-        ["Email (2nd)",     "mailto:ignaciocharlesandrei@gmail.com",          "ignaciocharlesandrei@gmail.com",   "about-default"],
-        ["Phone (2nd)",     "tel:+639208833382",                              "+63 (920) 883-3382",               "about-default"],
-        ["GitHub",          "https://github.com/ITechDummvry5",               "See my code",                      "about-default"]
+        ["Email",     "mailto:ignaciocharlesandrei@gmail.com",          "ignaciocharlesandrei@gmail.com",   "about-default"],
+        ["Phone",     "tel:+639208833382",                              "+63 (920) 883-3382",               "about-default"],
+        ["GitHub",          "https://github.com/ITechDummvry5",               "See my code",                      "about-default"],
       ],
       feature: { img: "hero-portrait", title: "Hi, I'm Charles", href: "#contact" },
       bottom: [
