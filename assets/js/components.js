@@ -15,6 +15,13 @@ if (!document.querySelector('link[href*="mega-menu.css"]')) {
   const l = document.createElement("link"); l.rel = "stylesheet"; l.href = SITE_ROOT + "assets/css/mega-menu.css?v=4";
   document.head.appendChild(l);
 }
+/* favicon: every page loads this file, so the tab icon is set here once (a page that already has its own <link rel="icon"> keeps it).
+   Put your favicon.ico at assets/images/favicon.ico (or change the path in FAVICON below, it is relative to the project root). */
+const FAVICON = "assets/images/favicon.ico";
+if (!document.querySelector('link[rel~="icon"]')) {
+  const f = document.createElement("link"); f.rel = "icon"; f.type = "image/x-icon"; f.href = SITE_ROOT + FAVICON;
+  document.head.appendChild(f);
+}
 const getTodayDate = () => {
   try {
     return new Intl.DateTimeFormat("en-US", {
@@ -98,15 +105,15 @@ const SITE = {
       /* TEST menu. cls "mega--black" turns the blobs and the circle black (see mega-menu.css). Portrait = image key "hero-portrait". */
       for: "Contact", type: "suite", cls: "mega--black", noCap: true, noMain: true,   // noCap: no "01 Email" pill; noMain: no big image on the left
       title: "Get in touch", href: "#contact",
-      mainLabel: "Contact me", chip: "Open to work", art: ["project-bg"],
+      mainLabel: "Contact me", chip: "Open to work", art: ["frontend-2", "about-default"],
       main: [
         // left column (01-03): main contacts + LinkedIn. right column (04-06): second email, second number + GitHub.
-        ["Email",           "mailto:itechdummvry@gmail.com",                  "itechdummvry@gmail.com",           ],
-        ["Phone",           "tel:+639467577265",                              "+63 (946) 757-7265",               ],
-        ["LinkedIn",        "https://linkedin.com/in/charles-andrei-ignacio", "Let's connect",                    ],
-        ["Email (2nd)",     "mailto:ignaciocharlesandrei@gmail.com",          "ignaciocharlesandrei@gmail.com",   ],
-        ["Phone (2nd)",     "tel:+639208833382",                              "+63 (920) 883-3382",               ],
-        ["GitHub",          "https://github.com/ITechDummvry5",               "See my code",                      ]
+        ["Email",           "mailto:itechdummvry@gmail.com",                  "itechdummvry@gmail.com",           "about-default"],
+        ["Phone",           "tel:+639467577265",                              "+63 (946) 757-7265",               "about-default"],
+        ["LinkedIn",        "https://linkedin.com/in/charles-andrei-ignacio", "Let's connect",                    "about-default"],
+        ["Email (2nd)",     "mailto:ignaciocharlesandrei@gmail.com",          "ignaciocharlesandrei@gmail.com",   "about-default"],
+        ["Phone (2nd)",     "tel:+639208833382",                              "+63 (920) 883-3382",               "about-default"],
+        ["GitHub",          "https://github.com/ITechDummvry5",               "See my code",                      "about-default"]
       ],
       feature: { img: "hero-portrait", title: "Hi, I'm Charles", href: "#contact" },
       bottom: [
