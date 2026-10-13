@@ -1,0 +1,27 @@
+/* skills.css: styles for skills.html only (the stack, grouped by category).
+   Colors, radii, borders, fonts and motion come from the global-style.css tokens, so it follows the light and dark theme. */
+
+.st-list{border-bottom:var(--border)}
+.st-row{display:grid;grid-template-columns:90px 1.2fr 1fr;gap:24px;align-items:center;padding:26px 0;border-top:var(--border);
+  opacity:0;transform:translateY(24px);transition:opacity calc(var(--t)*3),transform calc(var(--t)*3) cubic-bezier(.2,.7,.2,1)}
+.st-row.in{opacity:1;transform:none}
+.st-num{font:400 13px var(--font-mono);color:var(--mute)}
+.st-row h3{font-size:clamp(18px,2vw,26px);font-weight:500;letter-spacing:-.02em;margin-bottom:12px;transition:color var(--t),transform var(--t)}
+.st-row:hover h3{color:var(--acc);transform:translateX(12px)}
+.st-row p{max-width:380px;color:var(--mute);font-size:15px;line-height:1.5}
+
+/* logo tiles: image-manage.js paints the logo as a background; until it loads (or if the file is missing) the initials show */
+.st-logos{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.st-logo{display:grid;place-items:center;width:60px;height:60px;padding:10px;border:var(--border);border-radius:var(--r-sm);
+  background-color:var(--card);background-origin:content-box;background-clip:padding-box;
+  font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--mute);transition:border-color var(--t)}
+.st-logo:hover{border-color:var(--acc)}
+.st-logo.has-img{color:transparent}
+
+@media(max-width:820px){
+  .st-row{grid-template-columns:44px 1fr}
+  .st-logos{grid-column:1/-1;justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  .st-row{opacity:1;transform:none}
+}

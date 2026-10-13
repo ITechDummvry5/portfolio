@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IT Support | Charles Andrei Ignacio</title>
+<meta name="description" content="Reliable IT support for small businesses and individuals — hardware, software, and network troubleshooting handled clearly and quickly, by Charles Andrei Ignacio.">
+<script src="../../assets/js/font-manage.js"></script>
+<link rel="stylesheet" href="../../assets/css/global-style.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/service.css">
+<script>document.documentElement.className += ' sv-js'</script>
+<script src="../../assets/js/global.js"></script>
+<script src="../../assets/js/components.js"></script>
+</head>
+<body>
+<div class="sv-bar" aria-hidden="true"><i></i></div>
+<site-nav base="index.html"></site-nav>
+
+<main class="sv sv-devices">
+    <section class="ch th-orange lay-b" id="it-1" data-word="FIX" aria-label="IT Support">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ IT SUPPORT ]</div><h2 class="ch-h">Tech that just works.</h2></div>
+          <p class="ch-p rv">Slow computer, broken software, or a network that keeps dropping? I find the problem and fix it without the jargon.</p>
+          <p class="ch-p rv">You get a clear explanation of what went wrong and what was done, so you are never left guessing.</p>
+          <ul class="ch-chips rv"><li>Hardware</li><li>Software</li><li>Networking</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-cp" data-img="service-6"><span class="ch-num font-display" aria-hidden="true">01</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="it-2" data-word="BUG" aria-label="Troubleshooting">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ TROUBLESHOOTING ]</div><h2 class="ch-h">Problems solved, not postponed.</h2></div>
+          <p class="ch-p rv">Whether it is a crashed application, a missing driver, or a system that refuses to start, I trace the cause methodically and resolve it.</p>
+          <p class="ch-p rv">Remote sessions mean most issues can be sorted without waiting for a site visit, saving you time.</p>
+          <ul class="ch-chips rv"><li>Remote support</li><li>Crash diagnosis</li><li>Driver fixes</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-tablet" data-img="it-support-2"><span class="ch-num font-display" aria-hidden="true">02</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-orange lay-b" id="it-3" data-word="NET" aria-label="Network & Setup">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ NETWORK &AMP; SETUP ]</div><h2 class="ch-h">Connected and secure.</h2></div>
+          <p class="ch-p rv">I set up routers, switches, and Wi-Fi access points so your network is stable and reaches every corner of your space.</p>
+          <p class="ch-p rv">Basic security practices are applied from the start, so your connection is not left open to easy threats.</p>
+          <ul class="ch-chips rv"><li>Wi-Fi setup</li><li>Router config</li><li>Basic security</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-laptop" data-img="it-support-3"><span class="ch-num font-display" aria-hidden="true">03</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="it-4" data-word="NEW" aria-label="Device & Software Setup">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ DEVICE &AMP; SOFTWARE SETUP ]</div><h2 class="ch-h">Ready from day one.</h2></div>
+          <p class="ch-p rv">New laptop or desktop? I install the OS, update drivers, set up your accounts, and install the software you actually need.</p>
+          <p class="ch-p rv">Old files and settings are migrated cleanly, so switching devices does not mean starting from scratch.</p>
+          <ul class="ch-chips rv"><li>OS install</li><li>Data migration</li><li>Software setup</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-desktop" data-img="it-support-4"><span class="ch-num font-display" aria-hidden="true">04</span></figure>
+      </div>
+    </section>
+</main>
+
+<site-footer base="index.html"></site-footer>
+<script>
+(function(){
+const chs=[...document.querySelectorAll('.ch')];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.25});
+  chs.forEach(c=>io.observe(c));
+}else chs.forEach(c=>c.classList.add('in'));
+const bar=document.querySelector('.sv-bar i');
+function prog(){const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+addEventListener('scroll',prog,{passive:true});addEventListener('resize',prog);prog();
+})();
+</script>
+<script src="../../assets/js/image-manage.js" defer></script>
+</body>
+</html>

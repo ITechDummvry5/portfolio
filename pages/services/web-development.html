@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Development | Charles Andrei Ignacio</title>
+<meta name="description" content="Hand-coded websites and web apps in HTML, CSS, and JavaScript that load fast and work on every screen, by Charles Andrei Ignacio.">
+<script src="../../assets/js/font-manage.js"></script>
+<link rel="stylesheet" href="../../assets/css/global-style.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/service.css">
+<script>document.documentElement.className += ' sv-js'</script>
+<script src="../../assets/js/global.js"></script>
+<script src="../../assets/js/components.js"></script>
+</head>
+<body>
+<div class="sv-bar" aria-hidden="true"><i></i></div>
+<site-nav base="index.html"></site-nav>
+
+<main class="sv sv-devices">
+    <section class="ch th-orange lay-b" id="web-1" data-word="WEB" aria-label="Web Development">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ WEB DEVELOPMENT ]</div><h2 class="ch-h">Hand-coded. Fast. Yours.</h2></div>
+          <p class="ch-p rv">I build websites from scratch in HTML, CSS, and JavaScript. No bloated templates, just clean code written for your project.</p>
+          <p class="ch-p rv">You get a site that is easy to read, easy to maintain, and ready to grow when your business does.</p>
+          <ul class="ch-chips rv"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-cp" data-img="service-0"><span class="ch-num font-display" aria-hidden="true">01</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="web-2" data-word="FAST" aria-label="Fast Loading">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ FAST LOADING ]</div><h2 class="ch-h">Built to load fast.</h2></div>
+          <p class="ch-p rv">Visitors leave slow pages. I keep code lean, images sized properly, and scripts light so your pages open quickly.</p>
+          <p class="ch-p rv">Every page also gets the SEO basics: clear titles, descriptions, and a sensible structure that search engines can read.</p>
+          <ul class="ch-chips rv"><li>Lightweight</li><li>Optimized images</li><li>SEO basics</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-tablet" data-img="web-dev-2"><span class="ch-num font-display" aria-hidden="true">02</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-orange lay-b" id="web-3" data-word="RWD" aria-label="Responsive Design">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ RESPONSIVE DESIGN ]</div><h2 class="ch-h">Works on every screen.</h2></div>
+          <p class="ch-p rv">Your site should look right on a phone, a tablet, and a wide desktop monitor, not just the one it was built on.</p>
+          <p class="ch-p rv">Layouts adapt smoothly, text stays readable, and buttons are easy to tap. I also keep accessibility in mind, so more people can use what you publish.</p>
+          <ul class="ch-chips rv"><li>Responsive</li><li>Accessible</li><li>Mobile-friendly</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-laptop" data-img="web-dev-3"><span class="ch-num font-display" aria-hidden="true">03</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="web-4" data-word="JS" aria-label="Full-Stack">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ FULL-STACK ]</div><h2 class="ch-h">From pages to full apps.</h2></div>
+          <p class="ch-p rv">Need more than a static site? I build forms, dashboards, and data-driven tools with Node.js, Express, and PostgreSQL behind them.</p>
+          <p class="ch-p rv">Clean REST APIs connect the front end to your data, and Git keeps every change tracked and easy to roll back.</p>
+          <ul class="ch-chips rv"><li>Node.js &amp; Express</li><li>PostgreSQL</li><li>REST APIs</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-desktop" data-img="web-dev-4"><span class="ch-num font-display" aria-hidden="true">04</span></figure>
+      </div>
+    </section>
+</main>
+
+<site-footer base="index.html"></site-footer>
+<script>
+(function(){
+const chs=[...document.querySelectorAll('.ch')];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.25});
+  chs.forEach(c=>io.observe(c));
+}else chs.forEach(c=>c.classList.add('in'));
+const bar=document.querySelector('.sv-bar i');
+function prog(){const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+addEventListener('scroll',prog,{passive:true});addEventListener('resize',prog);prog();
+})();
+</script>
+<script src="../../assets/js/image-manage.js" defer></script>
+</body>
+</html>

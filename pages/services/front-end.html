@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frontend &amp; UI | Charles Andrei Ignacio</title>
+<meta name="description" content="Clean, responsive, accessible interfaces built from a design or from scratch, by Charles Andrei Ignacio.">
+<script src="../../assets/js/font-manage.js"></script>
+<link rel="stylesheet" href="../../assets/css/global-style.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/service.css">
+<script>document.documentElement.className += ' sv-js'</script>
+<script src="../../assets/js/global.js"></script>
+<script src="../../assets/js/components.js"></script>
+</head>
+<body>
+<div class="sv-bar" aria-hidden="true"><i></i></div>
+<site-nav base="index.html"></site-nav>
+
+<main class="sv sv-devices">
+    <section class="ch th-orange lay-b" id="frontend-1" data-word="UI" aria-label="Frontend &amp; UI">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ FRONTEND &AMP; UI ]</div><h2 class="ch-h">Interfaces that feel right.</h2></div>
+          <p class="ch-p rv">I build clean, responsive interfaces, whether you start with a finished design or just an idea.</p>
+          <p class="ch-p rv">Every screen is laid out with clear spacing and readable type, so people know what to do without thinking.</p>
+          <ul class="ch-chips rv"><li>Clean UI</li><li>Responsive</li><li>Built from scratch</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-cp" data-img="service-1"><span class="ch-num font-display" aria-hidden="true">01</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="frontend-2" data-word="FIG" aria-label="Design to Code">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ DESIGN TO CODE ]</div><h2 class="ch-h">From design to code.</h2></div>
+          <p class="ch-p rv">Got a Figma file or a sketch? I turn it into a working interface that matches what you imagined.</p>
+          <p class="ch-p rv">Spacing, type, colors, and button states are handled with care, and every screen is checked on mobile, tablet, and desktop.</p>
+          <ul class="ch-chips rv"><li>Figma to code</li><li>Pixel-accurate</li><li>Reusable styles</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-tablet" data-img="frontend-2"><span class="ch-num font-display" aria-hidden="true">02</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-orange lay-b" id="frontend-3" data-word="A11Y" aria-label="Accessibility">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ ACCESSIBILITY ]</div><h2 class="ch-h">Made for everyone.</h2></div>
+          <p class="ch-p rv">Good interfaces work for more people. I keep text readable, contrast clear, and focus states visible.</p>
+          <p class="ch-p rv">Pages can be used with a keyboard, not just a mouse, so nobody gets stuck on a button they cannot reach.</p>
+          <ul class="ch-chips rv"><li>Accessibility</li><li>Keyboard friendly</li><li>Readable text</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-laptop" data-img="frontend-3"><span class="ch-num font-display" aria-hidden="true">03</span></figure>
+      </div>
+    </section>
+
+    <section class="ch th-dark lay-c" id="frontend-4" data-word="MOVE" aria-label="Animations">
+      <div class="wrap wrap--wide ch-body">
+        <div class="ch-txt">
+          <div class="ch-top rv"><div class="tag">[ ANIMATIONS ]</div><h2 class="ch-h">A little motion goes far.</h2></div>
+          <p class="ch-p rv">Smooth transitions and small animations show what is happening on the page and make it feel polished.</p>
+          <p class="ch-p rv">Motion stays light and purposeful, and it respects visitors who prefer reduced motion.</p>
+          <ul class="ch-chips rv"><li>Animations</li><li>Smooth transitions</li><li>Reduced-motion friendly</li></ul>
+          <a class="pill ch-btn rv" href="../../index.html#contact">Request this service &nbsp;<span class="arrow">&rarr;</span></a>
+        </div>
+        <figure class="ch-img ph rv dev-desktop" data-img="frontend-4"><span class="ch-num font-display" aria-hidden="true">04</span></figure>
+      </div>
+    </section>
+</main>
+
+<site-footer base="index.html"></site-footer>
+<script>
+(function(){
+const chs=[...document.querySelectorAll('.ch')];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.25});
+  chs.forEach(c=>io.observe(c));
+}else chs.forEach(c=>c.classList.add('in'));
+const bar=document.querySelector('.sv-bar i');
+function prog(){const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+addEventListener('scroll',prog,{passive:true});addEventListener('resize',prog);prog();
+})();
+</script>
+<script src="../../assets/js/image-manage.js" defer></script>
+</body>
+</html>

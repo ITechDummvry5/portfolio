@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coming soon | Charles Andrei Ignacio</title>
+<script src="../assets/js/font-manage.js"></script>
+<link rel="stylesheet" href="../assets/css/global-style.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script src="../assets/js/components.js"></script>
+</head>
+<body>
+
+<site-nav base="index.html"></site-nav>
+
+<main>
+  <section class="sec"><div class="wrap soon-page">
+    <div class="soon-art" id="art"></div>
+    <div class="soon-body">
+      <div class="tag">[ COMING SOON ]</div>
+      <h2 id="title">This page</h2>
+      <p>This page isn't ready yet. Check back soon, or get in touch to talk about it now.</p>
+      <div class="soon-actions">
+        <a class="pill acc" href="../index.html#contact">Contact me</a>
+        <a class="pill" href="../index.html#services">Back to home</a>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<site-footer base="index.html"></site-footer>
+
+<script src="../assets/js/iso-fallback.js" defer></script>
+<script src="../assets/js/image-manage.js" defer></script>
+<script>
+// the service name comes from the link: coming-soon.html?service=Web%20Development
+addEventListener("DOMContentLoaded", function () {
+  const name = new URLSearchParams(location.search).get("service");
+  if (name) {
+    document.getElementById("title").textContent = name;
+    document.title = name + " | Coming soon | Charles Andrei Ignacio";
+  }
+  IsoFallback.mount(document.getElementById("art"), name || "Coming soon");
+});
+</script>
+</body>
+</html>

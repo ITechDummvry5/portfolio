@@ -1,0 +1,10 @@
+/* interests-modal.css: full-screen pop-up (modal) that shows interests.html inside an iframe.
+   Linked from index.html. Opened by the "See interests" link (see interests-modal.js). */
+.modal{position:fixed;inset:0;z-index:10001;background:#111;animation:modal-in .35s ease}   /* above the nav and mega menu (z-index 9999) */
+.modal[hidden]{display:none}
+.modal iframe{display:block;width:100%;height:100%;border:0}
+.modal-close{position:absolute;top:14px;right:15px;z-index:2;padding:9px 16px;border:0;border-radius:var(--r-pill,99px);background:#fff;color:#111;font:500 13px/1 var(--font,system-ui,sans-serif);cursor:pointer;transition:transform .2s}
+.modal-close:hover{transform:scale(1.05)}
+body.modal-open{overflow:hidden}
+@keyframes modal-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.modal{animation:none}}
