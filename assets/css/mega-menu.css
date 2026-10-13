@@ -1,82 +1,133 @@
 /* mega-menu.css: the mega menus in the nav. components.js puts each panel on <body> and loads this file automatically.
-   Both menus share one frame (full viewport width, same corners, padding, section headings and hover color); only the inside layout differs:
-     .mega--suite    : Skills   (big links, bordered list, image card)
-     .mega--showcase : Projects (project rows, big image panel)
-   Colors come from the global-style.css tokens, so they follow the site's light/dark theme. */
+   Compact floating card (same width as the nav). Colors come from the global-style.css tokens (follows light/dark),
+   --acc is the accent.
+     .mega--suite    : Skills + Projects. Left: numbered index. Right: image collage (arch, wide, pill) + sticker.
+                       Hovering a row swaps the arch image. Bottom strip: date, contact, CTA.
+     .mega--showcase : (not used right now, still supported) project rows + big image panel */
 
 .mega{
   --mm-bg:var(--card);--mm-card:var(--bg);--mm-ink:var(--ink);
   --mm-mute:var(--mute);--mm-line:var(--line);--mm-hover:var(--acc);
-  --mm-px:36px;--mm-py:32px;                       /* shared inner spacing */
-  --mm-edge:max(24px,calc((100vw - var(--wrap-wide,1110px))/2 + 24px));   /* lines content up with the page container */
-  position:fixed;top:76px;left:0;right:0;z-index:9999;     /* 100% of the viewport width */
+  --mm-tint:color-mix(in srgb,var(--acc) 12%,transparent);
+  --mm-px:28px;--mm-py:26px;--mm-edge:var(--mm-px);
+  position:fixed;top:76px;left:50%;z-index:9999;
+  width:min(1110px,calc(100vw - 48px));margin-top:8px;
   background:var(--mm-bg);color:var(--mm-ink);
-  border-radius:0 0 var(--r) var(--r);box-shadow:var(--shadow-lg);
+  border:1px solid var(--mm-line);border-radius:var(--r);box-shadow:var(--shadow-lg);
   text-align:left;overflow:hidden auto;scrollbar-width:none;
   font-family:var(--font);line-height:1.5;
   opacity:0;visibility:hidden;pointer-events:none;
-  transform:translateY(-8px);
+  transform:translate(-50%,-8px);
   transition:opacity var(--t),transform var(--t),visibility 0s var(--t);
 }
 .mega::-webkit-scrollbar{display:none}
-.mega.open{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity var(--t),transform var(--t),visibility 0s}
-/* invisible bridge so the pointer can move from the nav link into the panel without it closing */
-.mega::before{content:"";position:absolute;left:0;right:0;top:-24px;height:24px}
+.mega.open{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition:opacity var(--t),transform var(--t),visibility 0s}
 .mega a{color:inherit;text-decoration:none}
-.mega a:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+.mega a:focus-visible{outline:2px solid var(--acc);outline-offset:-2px;border-radius:12px}
 
-/* shared section heading: small orange capitals */
-.mm-kick,.mm-sec h4,.mm-side-title,.mm-lbl{margin:0;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+/* small accent capitals */
+.mm-kick,.mm-sec h4,.mm-lbl{margin:0;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.mm-ic{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--t),opacity var(--t)}
 
-/* arrow icons */
-.mm-ic{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--t)}
+/* ===== suite layout (Skills, Projects) ===== */
+.mm-in{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:14px 34px;padding:22px 24px 0 26px}
 
-/* ===== suite layout (Skills) ===== */
-.mm-in{max-width:var(--wrap-wide,1110px);margin:0 auto;padding:var(--mm-py) 24px}
+.mm-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.mm-kick{display:flex;align-items:center;gap:9px}
+.mm-dot-acc{display:none}
+.mega .mm-title{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;letter-spacing:-.01em;transition:color var(--t)}
+.mm-circle{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;transition:transform var(--t),background var(--t)}
+.mm-circle .mm-ic{width:10px;height:10px;stroke-width:1.8}
+.mm-title:hover .mm-circle,.mm-title:focus-visible .mm-circle{transform:translateX(3px);background:var(--acc-dark)}
 
-.mega .mm-title{display:inline-flex;align-items:center;gap:18px;font-size:clamp(26px,3.2vw,40px);font-weight:400;letter-spacing:-.02em;line-height:1.1}
-.mm-circle{display:grid;place-items:center;flex:none;width:.95em;height:.95em;border-radius:50%;background:var(--mm-ink);color:var(--mm-bg);transition:background var(--t),color var(--t),transform var(--t)}
-.mm-circle .mm-ic{width:.36em;height:.36em;stroke-width:1.5}
-.mm-title:hover .mm-circle,.mm-title:focus-visible .mm-circle{background:var(--acc);color:#fff;transform:translateX(4px)}
+/* numbered index */
+.mm-index{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));grid-template-rows:repeat(var(--rows,4),auto);gap:2px 12px}
+.mega .mm-item{display:grid;grid-template-columns:22px minmax(0,1fr) 12px;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;transition:background var(--t)}
+.mm-num{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums;color:var(--mm-mute);transition:color var(--t)}
+.mm-txt b{display:block;font-size:14.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-txt small{display:block;font-size:12px;line-height:1.35;color:var(--mm-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-item .mm-ic{width:11px;height:11px;color:var(--acc);opacity:0;transform:translate(-4px,4px)}
+.mega .mm-item:hover,.mega .mm-item:focus-visible,.mega .mm-item.on{background:var(--mm-tint)}
+.mm-item:hover .mm-num,.mm-item:focus-visible .mm-num,.mm-item.on .mm-num{color:var(--acc)}
+.mm-item:hover .mm-ic,.mm-item:focus-visible .mm-ic,.mm-item.on .mm-ic{opacity:1;transform:none}
+.mm-item:hover .mm-ic{transform:translate(2px,-2px)}
 
-.mm-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) 280px;gap:40px;margin-top:32px;align-items:start}
-.mm-grid--no-side{grid-template-columns:1fr 280px;gap:48px}
-.mm-grid--no-side .mm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 36px}
-.mm-grid--no-side .mm-big-link{font-size:clamp(19px,2vw,25px);padding:4px 0}
-.mm-big .mm-kick{margin-bottom:12px}
+/* Projects: rows with a thumbnail */
+.mm-index.has-th{gap:6px}
+.mm-index.has-th .mm-item{grid-template-columns:22px 56px minmax(0,1fr) 12px;padding:9px 12px}
+.mm-th{width:56px;height:40px;border-radius:10px;background-size:cover;background-position:center}
+.mm-index.has-th .mm-txt b{font-size:15.5px}
 
-.mega .mm-big-link{display:flex;align-items:center;gap:12px;width:max-content;max-width:100%;padding:2px 0;font-size:clamp(22px,2.4vw,32px);font-weight:400;letter-spacing:-.02em;line-height:1.3;transition:color var(--t)}
-.mm-big-link .mm-ic{width:.42em;height:.42em;margin-top:.3em}
-.mm-big-link:hover .mm-ic{transform:translate(3px,-3px)}
+/* image collage: three shapes, three sizes, one accent block */
+.mm-art{position:relative;height:262px;align-self:start}
+.mm-art>*{position:absolute}
+/* puzzle fit: the blob's rounded top-right corner (r 72) sits inside the notch cut from the image's bottom-left (r 80), 8px gap */
+.mm-blob{left:-28px;top:190px;width:100px;height:80px;border-radius:18px 72px 18px 18px;background:var(--grad-acc);z-index:0}
+.mm-i1,.mm-i2{z-index:1;background-size:cover;background-position:center}
+.mm-i1{left:0;top:0;width:212px;height:262px;border-radius:30px 75px 30px 30px;overflow:hidden;
+  -webkit-mask:radial-gradient(circle 80px at 0 100%,transparent 79px,#000 80px);
+  mask:radial-gradient(circle 80px at 0 100%,transparent 79px,#000 80px)}
+.mm-i1.swap{animation:mmSwap .4s ease}
+@keyframes mmSwap{from{opacity:.4;transform:scale(1.04)}to{opacity:1;transform:none}}
+/* puzzle fit: the accent circle (r 60, centre x 332 / y 160) pokes up into a round notch (r 68) cut from the bottom edge of this image */
+.mm-i2{left:224px;top:0;width:216px;height:112px;border-radius:18px;
+  -webkit-mask:radial-gradient(circle 68px at 108px 160px,transparent 67px,#000 68px);
+  mask:radial-gradient(circle 68px at 108px 160px,transparent 67px,#000 68px)}
+.mm-cap{z-index:3;left:12px;bottom:12px;display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:var(--r-pill);background:var(--mm-bg);color:var(--mm-ink);font-size:12px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.mm-cap i{font-style:normal;padding:2px 7px;border-radius:var(--r-pill);background:var(--acc);color:#fff;font-size:10.5px;font-weight:600}
+.mm-chip{z-index:3;left:234px;top:10px;padding:4px 11px;border-radius:var(--r-pill);background:var(--acc);color:#fff;font-size:11px;font-weight:600;letter-spacing:.02em}
 
-.mega .mm-side-title{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--mm-line);transition:color var(--t)}
-.mm-side-title .mm-ic{width:12px;height:12px}
-.mm-side-title:hover .mm-ic{transform:translateX(4px)}
-.mega .mm-row{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--mm-line);font-size:16px;color:var(--mm-mute);transition:color var(--t)}
-.mm-row:hover .mm-ic{transform:translate(3px,-3px)}
+/* cut-out sticker on an accent circle */
+.mega .mm-feature{z-index:2;left:224px;top:124px;width:216px;height:138px;display:block}
+.mm-sbg{position:absolute;left:48px;bottom:42px;width:120px;height:120px;border-radius:50%;background:var(--grad-acc);transition:transform calc(var(--t)*2)}
+/* Skills menu (Shego): green circle instead of the accent orange. Projects keeps the accent. */
+.mega--suite:has(.mm-index:not(.has-th)) .mm-sbg{background:linear-gradient(135deg,#6ee05a,#1fa83a)}
+/* Contact menu (test): every blob and the circle behind the portrait are black. !important because the Skills rules above are more specific. */
+.mega--black .mm-blob,.mega--black .mm-sbg,.mega--black .mm-left::after{background:linear-gradient(135deg,#2b2b2b,#000)!important}
+/* Contact menu: no bottom-left blob and no notch, so the big image is whole */
+.mega--black .mm-blob{display:none}
+.mega--black .mm-i1{-webkit-mask:none;mask:none}
+/* Contact menu: the wide image and the portrait use the whole 440px column. The circle (r 60) is centred at x 220 and
+   pokes into the notch (r 68) cut from the bottom edge of the wide image. */
+.mega--black .mm-i2{left:0;width:440px;height:140px;
+  -webkit-mask:radial-gradient(circle 68px at 220px 188px,transparent 67px,#000 68px);
+  mask:radial-gradient(circle 68px at 220px 188px,transparent 67px,#000 68px)}
+.mega--black .mm-chip{left:10px}
+.mega--black .mm-feature{left:0;width:440px}
+.mega--black .mm-sbg{left:160px;bottom:14px}.mm-sticker{position:absolute;left:0;bottom:10px;width:100%;height:128px;background:none;border-radius:0;transition:transform calc(var(--t)*2)}
+.mm-ftxt{position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);white-space:nowrap;padding:3px 10px;border-radius:var(--r-pill);background:var(--mm-ink);color:var(--mm-bg);font-size:11px;font-weight:500}
+.mm-feature:hover .mm-sticker,.mm-feature:focus-visible .mm-sticker{transform:rotate(-4deg) scale(1.05)}
+.mm-feature:hover .mm-sbg{transform:scale(1.08)}
 
-.mega .mm-feature{display:flex;flex-direction:column;align-self:stretch;background:var(--mm-card);border-radius:var(--r);overflow:hidden;font-size:20px;font-weight:500;letter-spacing:-.01em}
-.mm-fimg{flex:1 1 auto;min-height:220px;border-radius:0;transition:transform calc(var(--t)*2)}
-.mm-feature:hover .mm-fimg{transform:scale(1.03)}
-.mm-feature span{flex:none;position:relative;padding:16px 18px 18px;border-top:1px solid var(--mm-line);background:var(--mm-card)}
-
-.mm-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:12px 30px;margin-top:32px}
-.mega .mm-small{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--mm-mute);transition:color var(--t)}
-.mm-small .mm-ic{width:11px;height:11px}
+/* bottom strip */
+.mm-bottom{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px;margin:0 -24px 0 -26px;padding:11px 24px 12px 26px;background:var(--mm-card);border-top:1px solid var(--mm-line)}
+.mega .mm-small{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--mm-mute);transition:color var(--t)}
+.mm-small .mm-ic{width:10px;height:10px}
 .mm-small:hover .mm-ic{transform:translate(2px,-2px)}
-.mega .mm-date{color:var(--mm-ink);font-weight:500;gap:8px}
-.mm-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);flex:none}
+.mega .mm-date{color:var(--mm-ink);font-weight:500}
+.mm-dot{display:none}
+.mega a.mm-small:hover,.mega a.mm-small:focus-visible{color:var(--mm-hover)}
+.mega .mm-cta{margin-left:auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:var(--r-pill);background:var(--acc);color:#fff;font-size:13px;font-weight:500;transition:background var(--t)}
+.mm-cta .mm-ic{width:10px;height:10px;stroke-width:1.8}
+.mega .mm-cta:hover,.mega .mm-cta:focus-visible{background:var(--acc-dark)}
+.mm-cta:hover .mm-ic{transform:translate(2px,-2px)}
 
-/* one hover color for every text link in both menus */
-.mega .mm-big-link:hover,.mega .mm-big-link:focus-visible,
-.mega .mm-row:hover,.mega .mm-row:focus-visible,
-.mega .mm-small:hover,.mega .mm-small:focus-visible,
-.mega .mm-proj:hover b,.mega .mm-proj:focus-visible b{color:var(--mm-hover)}
-.mega .mm-side-title:hover,.mega .mm-side-title:focus-visible{color:var(--mm-ink)}
+/* puzzle fit, list side (Skills menu only): an accent blob in the empty corner under the second column dips into a
+   round notch cut from the top edge of the bottom strip. Blob: 120 wide, bottom semicircle r 60. Notch: r 68 (8px gap),
+   same centre, measured from the right edge so it follows the menu width. Hidden below 1000px with the image collage. */
+@media(min-width:1001px){
+  .mega--suite:has(.mm-index:not(.has-th)) .mm-left{position:relative}
+  .mega--suite:has(.mm-index:not(.has-th)) .mm-left::after{
+    content:"";position:absolute;right:24px;bottom:-38px;width:120px;height:80px;z-index:1;pointer-events:none;
+    border-radius:18px 18px 60px 60px;background:var(--grad-acc)}
+  .mega--suite:has(.mm-index:not(.has-th)) .mm-bottom{
+    -webkit-mask:radial-gradient(circle 68px at right 582px top -36px,transparent 67px,#000 68px);
+    mask:radial-gradient(circle 68px at right 582px top -36px,transparent 67px,#000 68px)}
+}
 
 /* ===== showcase layout (Projects) ===== */
 .mm-show{display:grid;grid-template-columns:1fr 1fr;min-height:360px}
-.mm-list{padding:var(--mm-py) var(--mm-px) var(--mm-py) var(--mm-edge)}
+.mm-list{padding:var(--mm-py) var(--mm-px)}
 .mm-sec+.mm-sec{margin-top:28px}
 .mm-sec h4{margin-bottom:12px}
 .mega .mm-proj{display:flex;align-items:center;gap:16px;padding:10px;margin:0 -10px;border-radius:14px;transition:background var(--t)}
@@ -95,11 +146,10 @@
 .mega .mm-btn{display:inline-block;padding:10px 20px;border-radius:var(--r-pill);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:14px;font-weight:500;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background var(--t),border-color var(--t)}
 .mega .mm-btn:hover,.mega .mm-btn:focus-visible{background:var(--acc);border-color:var(--acc)}
 
-/* narrower laptops: drop the Skills image card */
+/* narrower laptops: drop the image collage */
 @media(max-width:1000px){
-  .mm-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .mm-grid--no-side{grid-template-columns:1fr}
-  .mega .mm-feature{display:none}
+  .mm-in{grid-template-columns:1fr}
+  .mm-art{display:none}
 }
 /* phones and tablets: no mega menus, the nav links just scroll to their sections */
 @media(max-width:820px){.mega{display:none!important}}
@@ -114,4 +164,4 @@
 .has-mega>a[aria-expanded="true"] .mm-caret{transform:rotate(-135deg);margin-top:3px}
 @media(max-width:820px){.mm-caret{display:none}}
 
-@media(prefers-reduced-motion:reduce){.mega,.mm-fimg,.mm-ic,.mm-circle,.mm-caret{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.mega,.mm-ic,.mm-circle,.mm-caret,.mm-sbg,.mm-sticker{transition:none!important}.mm-i1.swap{animation:none}}

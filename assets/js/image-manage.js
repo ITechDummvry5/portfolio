@@ -77,6 +77,7 @@
     // skills mega menu (index nav): the image card on the right
     "mega-shiego":          ["mega/shiego.png",         "My full tech stack"],
     "mega-kim":             ["mega/kim.png",            "My full tech stack"],
+    "project-bg":           ["mega/project-bg.png",     "My full tech stack"],
   };
 
   // Apply images inside root (the whole page by default).

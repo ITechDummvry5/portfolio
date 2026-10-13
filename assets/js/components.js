@@ -11,8 +11,8 @@
 const SITE_ROOT = new URL("../../", document.currentScript.src).href;
 
 /* mega menu styles load from here, so no page needs an extra <link> */
-if (!document.querySelector('link[href$="mega-menu.css"]')) {
-  const l = document.createElement("link"); l.rel = "stylesheet"; l.href = SITE_ROOT + "assets/css/mega-menu.css";
+if (!document.querySelector('link[href*="mega-menu.css"]')) {
+  const l = document.createElement("link"); l.rel = "stylesheet"; l.href = SITE_ROOT + "assets/css/mega-menu.css?v=4";
   document.head.appendChild(l);
 }
 const getTodayDate = () => {
@@ -54,22 +54,22 @@ const SITE = {
      cat-<category> for a row, tool-<name> for a logo, lowercase with dashes, e.g. tool-node-js).
      Links starting with http open in a new tab. Image keys live in image-manage.js.
 
-     type "suite"    : big title, big links (main, with mainLabel above), bordered list (side), image card (feature), small links (bottom). Items are [label, link].
+     type "suite"    : numbered index (main: [label, link, short text, image key], hovering a row swaps the big image), 2 more images (art), sticker (feature), chip, small links (bottom) + CTA.
      type "showcase" : (not used right now, still supported) sections of project rows on the left, a big image panel on the right.
                        Row = [name, description, link, image key]. Image panel text and button are in "feature". */
   megas: [
     {
       for: "Skills", type: "suite",
       title: "Explore my skills", href: "pages/skills.html",
-      mainLabel: "What I build",
+      mainLabel: "What I build", chip: "7 services", art: ["frontend-2", "about-default"],
       main: [
-        ["Web Development",           "pages/services/web-development.html"],
-        ["Frontend & UI",             "pages/services/front-end.html"],
-        ["Portfolio & Landing Pages", "pages/services/portfolio.html"],
-        ["Web Apps",                  "pages/services/web-apps.html"],
-        ["VBA Automation",            "pages/services/vba.html"],
-        ["WordPress",                 "pages/services/wordpress.html"],
-        ["IT Support",                "pages/services/it-support.html"]
+        ["Web Development",           "pages/services/web-development.html", "Fast, responsive sites",   "service-0"],
+        ["Frontend & UI",             "pages/services/front-end.html",       "Design to clean code",     "service-1"],
+        ["Portfolio & Landing Pages", "pages/services/portfolio.html",       "One page, one goal",       "service-2"],
+        ["Web Apps",                  "pages/services/web-apps.html",        "Dashboards and data",      "service-3"],
+        ["VBA Automation",            "pages/services/vba.html",             "Excel on autopilot",       "service-4"],
+        ["WordPress",                 "pages/services/wordpress.html",       "Themes, plugins, content", "service-5"],
+        ["IT Support",                "pages/services/it-support.html",      "Remote fixes and setup",   "service-6"]
       ],
       feature: { img: "mega-shiego", title: "Shego!?", href: "pages/skills.html" },
       bottom: [
@@ -81,17 +81,36 @@ const SITE = {
     {
       for: "Projects", type: "suite",
       title: "Explore my projects", href: "pages/projects.html",
-      mainLabel: "Featured work",
+      mainLabel: "Featured work", chip: "3 featured", cols: 1, thumbs: true, art: ["projects-hero", "about-default"],
       main: [
-        ["ISEMS",     "https://github.com/ITechDummvry5"],
-        ["PromptKit", "https://github.com/ITechDummvry5"],
-        ["Landscape", "https://github.com/ITechDummvry5"]
+        ["ISEMS",     "https://github.com/ITechDummvry5", "Campus ERP system",      "project-isems"],
+        ["PromptKit", "https://github.com/ITechDummvry5", "AI image prompt helper",  "project-promptkit"],
+        ["Landscape", "https://github.com/ITechDummvry5", "Sustainable farming site", "project-landscape"]
       ],
       feature: { img: "mega-kim", title: "What's the sitch?", href: "pages/projects.html" },
       bottom: [
         [getTodayDate(), "", "date"],
         ["+63 (920) 883-3382", "tel:+639208833382"],
         ["ignaciocharlesandrei@gmail.com", "mailto:ignaciocharlesandrei@gmail.com"]
+      ]
+    },
+    {
+      /* TEST menu. cls "mega--black" turns the blobs and the circle black (see mega-menu.css). Portrait = image key "hero-portrait". */
+      for: "Contact", type: "suite", cls: "mega--black", noCap: true, noMain: true,   // noCap: no "01 Email" pill; noMain: no big image on the left
+      title: "Get in touch", href: "#contact",
+      mainLabel: "Contact me", chip: "Open to work", art: ["project-bg"],
+      main: [
+        // left column (01-03): main contacts + LinkedIn. right column (04-06): second email, second number + GitHub.
+        ["Email",           "mailto:itechdummvry@gmail.com",                  "itechdummvry@gmail.com",           ],
+        ["Phone",           "tel:+639467577265",                              "+63 (946) 757-7265",               ],
+        ["LinkedIn",        "https://linkedin.com/in/charles-andrei-ignacio", "Let's connect",                    ],
+        ["Email (2nd)",     "mailto:ignaciocharlesandrei@gmail.com",          "ignaciocharlesandrei@gmail.com",   ],
+        ["Phone (2nd)",     "tel:+639208833382",                              "+63 (920) 883-3382",               ],
+        ["GitHub",          "https://github.com/ITechDummvry5",               "See my code",                      ]
+      ],
+      feature: { img: "hero-portrait", title: "Hi, I'm Charles", href: "#contact" },
+      bottom: [
+        [getTodayDate(), "", "date"]
       ]
     }
   ],
@@ -114,19 +133,29 @@ const link = (cls, [t, h, meta], ic = ARR_UP) => !h
   : `<a class="${cls}" href="${h}"${pageAttr(h, t)}><span>${t}</span>${ic}</a>`;
 
 function megaSuite(M) {
+  const items = M.main, cols = M.cols || 2, rows = Math.ceil(items.length / cols), art = M.art || [];
+  const num = i => String(i + 1).padStart(2, "0");
+  const F = M.feature;
   return `
-<div class="mega mega--suite" role="region" aria-label="${M.for} menu"><div class="mm-in">
-  ${M.title ? `<a class="mm-title" href="${M.href}"${pageAttr(M.href, M.for)}><span>${M.title}</span><i class="mm-circle">${ARR_RT}</i></a>` : ''}
-  <div class="mm-grid${M.side ? '' : ' mm-grid--no-side'}">
-    <div class="mm-big"><h4 class="mm-kick">${M.mainLabel}</h4><div class="mm-cols">${M.main.map(i => link("mm-big-link", i)).join("")}</div></div>
-    ${M.side && M.side.items ? `
-    <div class="mm-side">
-      <a class="mm-side-title" href="${M.side.href}"${pageAttr(M.side.href, M.for)}><span>${M.side.title}</span>${ARR_RT}</a>
-      ${M.side.items.map(i => link("mm-row", i)).join("")}
-    </div>` : ''}
-    <a class="mm-feature" href="${M.feature.href}"${pageAttr(M.feature.href, M.for)}><div class="mm-fimg ph" data-img="${M.feature.img}"></div><span>${M.feature.title}</span></a>
+<div class="mega mega--suite${M.cls ? ' ' + M.cls : ''}" role="region" aria-label="${M.for} menu"><div class="mm-in">
+  <div class="mm-left">
+    <div class="mm-top">
+      <h4 class="mm-kick"><i class="mm-dot-acc"></i>${M.mainLabel}</h4>
+      ${M.title ? `<a class="mm-title" href="${M.href}"${pageAttr(M.href, M.for)}><span>${M.title}</span><i class="mm-circle">${ARR_RT}</i></a>` : ''}
+    </div>
+    <ol class="mm-index${M.thumbs ? ' has-th' : ''}" style="--cols:${cols};--rows:${rows}">${items.map(([t, h, d, k], i) => `
+      <li><a class="mm-item${i ? '' : ' on'}" href="${h}"${pageAttr(h, t)} data-k="${k || ''}" data-num="${num(i)}"><span class="mm-num">${num(i)}</span>${M.thumbs && k ? `<span class="mm-th ph" data-img="${k}"></span>` : ''}<span class="mm-txt"><b>${t}</b>${d ? `<small>${d}</small>` : ''}</span>${ARR_UP}</a></li>`).join("")}
+    </ol>
   </div>
-  ${M.bottom ? `<div class="mm-bottom">${M.bottomLabel ? `<span class="mm-lbl">${M.bottomLabel}</span>` : ''}${M.bottom.map(i => link("mm-small", i)).join("")}</div>` : ''}
+  <div class="mm-art">
+    <i class="mm-blob" aria-hidden="true"></i>
+    ${M.noMain ? '' : `<div class="mm-i1 ph" data-img="${items[0][3] || ''}"></div>`}
+    ${M.noCap ? '' : `<span class="mm-cap"><i>${num(0)}</i><b>${items[0][0]}</b></span>`}
+    <div class="mm-i2 ph" data-img="${art[0] || ''}"></div>
+    ${M.chip ? `<span class="mm-chip">${M.chip}</span>` : ''}
+    <a class="mm-feature" href="${F.href}"${pageAttr(F.href, M.for)}><i class="mm-sbg"></i><div class="mm-sticker ph" data-img="${F.img}" data-fit="contain"></div><span class="mm-ftxt">${F.title}</span></a>
+  </div>
+  ${M.bottom ? `<div class="mm-bottom">${M.bottom.map(i => link("mm-small", i)).join("")}<a class="mm-cta" href="index.html${SITE.cta[1]}"><span>${SITE.cta[0]}</span>${ARR_UP}</a></div>` : ''}
 </div></div>`;
 }
 
@@ -171,6 +200,23 @@ class SiteNav extends HTMLElement {
       const p = wrap.firstElementChild;
       fixLinks(p);
       document.body.appendChild(p);
+      window.ImageManager && ImageManager.apply(p);
+      // hovering (or focusing) a row swaps the big image and its caption
+      const big = p.querySelector(".mm-i1"), cap = p.querySelector(".mm-cap");
+      if (big) {
+        const url = k => window.ImageManager && ImageManager.url(k);
+        p.addEventListener("mouseenter", () => p.querySelectorAll(".mm-item[data-k]").forEach(x => { const u = url(x.dataset.k); if (u) new Image().src = u; }), { once: true });
+        p.querySelectorAll(".mm-item").forEach(x => {
+          const swap = () => {
+            p.querySelectorAll(".mm-item.on").forEach(o => o.classList.remove("on")); x.classList.add("on");
+            const u = url(x.dataset.k); if (!u) return;
+            big.style.backgroundImage = 'url("' + u + '")';
+            if (cap) { cap.querySelector("i").textContent = x.dataset.num; cap.querySelector("b").textContent = x.querySelector("b").textContent; }
+            big.classList.remove("swap"); void big.offsetWidth; big.classList.add("swap");
+          };
+          x.addEventListener("mouseenter", swap); x.addEventListener("focus", swap);
+        });
+      }
       const a = li.querySelector("a");
       let t;
       const m = { p, close() { clearTimeout(t); p.classList.remove("open"); a.setAttribute("aria-expanded", "false"); } };
